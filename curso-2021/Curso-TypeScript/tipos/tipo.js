@@ -52,3 +52,21 @@ function retornaSoma(numero1_teste, numero2_teste) {
     return (numero1_teste + numero2_teste);
 }
 console.log("Soma aleátoria: " + retornaSoma(numero1_teste, numero2_teste));
+// parte dois de funções
+var teste = function (numero1_teste, numero2_teste) {
+    if (numero1_teste < numero2_teste) {
+        return true;
+    }
+    return false;
+};
+console.log("Resulado: " + teste(10, 20));
+// Objetos
+var usuario = {
+    nome: 'Bruno',
+    idade: 32
+};
+console.log('1 - ');
+console.log(usuario);
+usuario = { nome: 'João', idade: 70 };
+console.log('2 - ');
+console.log(usuario);

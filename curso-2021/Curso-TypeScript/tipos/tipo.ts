@@ -65,3 +65,29 @@ function retornaSoma(numero1_teste: number, numero2_teste: number): number {
 }
 
 console.log("Soma aleátoria: " + retornaSoma(numero1_teste, numero2_teste))
+
+// parte dois de funções
+
+const teste = function (numero1_teste: number, numero2_teste: number): boolean {
+    if ( numero1_teste < numero2_teste ) {
+        return true
+    }
+    return false
+}
+
+console.log("Resulado: " + teste(10, 20))
+
+// Objetos
+
+let usuario: {nome: string, idade: number} =  {
+    nome: 'Bruno',
+    idade: 32
+}
+
+console.log('1 - ')
+console.log(usuario)
+
+usuario = {nome: 'João', idade: 70}
+
+console.log('2 - ')
+console.log(usuario)
