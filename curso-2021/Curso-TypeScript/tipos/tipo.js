@@ -70,3 +70,31 @@ console.log(usuario);
 usuario = { nome: 'João', idade: 70 };
 console.log('2 - ');
 console.log(usuario);
+var funcionario = {
+    supervisor: ['Bruno', 'Augusto'],
+    baterPont: function (horas) {
+        if (horas <= 8) {
+            return 'Ponto Normal!';
+        }
+        return 'Fora do horário!';
+    }
+};
+console.log(funcionario.supervisor);
+console.log(funcionario.baterPont(7));
+// Exemplo é a mesma coisa
+var nota = 10;
+console.log("Minha nota \u00E9 " + nota);
+console.log('Minha nota é ' + nota);
+// Union Types
+var graus = 35;
+console.log('Temperatura: ' + graus);
+graus = '36°';
+console.log('Temperatura: ' + graus);
+// Chegando tipos
+var valor = 20;
+if (typeof valor === "number") {
+    console.log("O valor é do tipo number!");
+}
+else {
+    console.log("O valor não é do tipo number!");
+}

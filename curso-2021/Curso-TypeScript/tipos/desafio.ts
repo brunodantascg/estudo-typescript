@@ -11,7 +11,7 @@ Criar Objeto funcionário com:
 
 console.log(" --- Desafio --- ")
 
-let funcionario: {supervirores: string[], baterPonto: (horas: number) => string} = {
+let funcionarios: {supervirores: string[], baterPonto: (horas: number) => string} = {
     supervirores: ['Pedro', 'Alberto', 'João'],
     baterPonto(horas: number): string {
         if (horas <= 8 ) {
@@ -21,5 +21,5 @@ let funcionario: {supervirores: string[], baterPonto: (horas: number) => string}
     },
 }
 
-console.log("Ponto: " + funcionario.supervirores)
-console.log("Ponto: " + funcionario.baterPonto(10))
+console.log("Ponto: " + funcionarios.supervirores)
+console.log("Ponto: " + funcionarios.baterPonto(10))

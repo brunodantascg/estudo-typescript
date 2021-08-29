@@ -91,3 +91,49 @@ usuario = {nome: 'João', idade: 70}
 
 console.log('2 - ')
 console.log(usuario)
+
+// Tipo Personalizado
+
+type Funcionario = {
+    supervisor: string[],
+    baterPont: (horas: number) => string
+}
+
+let funcionario: Funcionario = {
+    supervisor: ['Bruno', 'Augusto'],
+    baterPont (horas: number): string {
+        if (horas <= 8 ) {
+            return 'Ponto Normal!'
+        }
+        return 'Fora do horário!'
+    }
+}
+
+console.log(funcionario.supervisor)
+console.log(funcionario.baterPont(7))
+
+// Exemplo é a mesma coisa
+
+let nota: number = 10
+
+console.log(`Minha nota é ${nota}`)
+console.log('Minha nota é ' + nota)
+
+// Union Types
+let graus: string | number = 35
+
+console.log('Temperatura: ' + graus)
+
+graus = '36°'
+
+console.log('Temperatura: ' + graus)
+
+
+// Chegando tipos
+let valor = 20
+
+if (typeof valor === "number") {
+    console.log("O valor é do tipo number!")
+} else {
+    console.log("O valor não é do tipo number!")
+}
