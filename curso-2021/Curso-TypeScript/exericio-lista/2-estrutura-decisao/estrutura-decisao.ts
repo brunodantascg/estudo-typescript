@@ -95,3 +95,42 @@ console.log("6: Maior - " + maiorTres(15,16,17))
 console.log("7: Menor - " + menorTres(15,18,17))
 
 // 8 - Faça um programa que pergunte o preço de três produtos e informe qual produto você deve comprar, sabendo que a decisão é sempre pelo mais barato.
+function melhorCompra(produto1: number, produto2: number, produto3: number): number {
+    if (produto1 < produto2 && produto1 < produto3) {
+        return produto1
+    } else if (produto2 < produto1 && produto2 < produto3) {
+        return produto2
+    } else {
+        return produto3
+    }
+}
+
+console.log("8: Produto com menor preço - R$ " + melhorCompra(55.20,60,65.99))
+
+// 9 - Faça um Programa que leia três números e mostre-os em ordem decrescente.
+
+function ordemDecrescente(num1: number, num2: number, num3: number): number[] {
+    if((num1 < num2) && (num1 < num3)) {
+        if(num2 < num3) {
+            return [num1, num2, num3]
+        } else {
+            return [num1, num3, num2]
+        }
+    } else if ((num2 < num1) && (num2 < num3)) {
+        if (num1 < num3) {
+            return [num1, num3, num2]
+        } else {
+            return [num2, num3, num1]
+        }
+    } else if ((num3 < num1) && (num3 < num2)) {
+        if (num1 < num2) {
+            return [num3, num1, num2]
+        } else {
+            return [num3, num2, num1]
+        }
+    } else {
+        return [0,0,0]
+    }
+}
+
+console.log("9: " + ordemDecrescente(15,11,10))
