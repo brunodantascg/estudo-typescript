@@ -134,3 +134,108 @@ function ordemDecrescente(num1: number, num2: number, num3: number): number[] {
 }
 
 console.log("9: " + ordemDecrescente(15,11,10))
+
+// 10 -Faça um Programa que pergunte em que turno você estuda. Peça para digitar:
+// M-matutino ou V-Vespertino ou N- Noturno. Imprima a mensagem  "Bom Dia!", "Boa Tarde!" ou "Boa Noite!" ou "Valor Inválido!", 
+// conforme o caso.
+
+function turnoEstudo(turno: string): string {
+    turno = turno.toUpperCase();
+    if (turno === 'M') {
+        return "M-Matutino"
+    } else if (turno === 'V') {
+        return "V-Vespetino"
+    } else if (turno === 'N') {
+        return "N-Noturno"
+    } else {
+        return "Não identificado!"
+    }
+}
+
+console.log("10: " + turnoEstudo('v'))
+
+// 11 - As Organizações Tabajara resolveram dar um aumento de salário aos seus colaboradores e lhe contraram para desenvolver o programa que calculará os reajustes.
+// Faça um programa que recebe o salário de um colaborador e o reajuste segundo o seguinte critério, baseado no salário atual:
+// salários até R$ 280,00 (incluindo) : aumento de 20%
+// salários entre R$ 280,00 e R$ 700,00 : aumento de 15%
+// salários entre R$ 700,00 e R$ 1500,00 : aumento de 10%
+// salários de R$ 1500,00 em diante : aumento de 5% Após o aumento ser realizado, informe na tela:
+// o salário antes do reajuste;
+// o percentual de aumento aplicado;
+// o valor do aumento;
+// o novo salário, após o aumento.
+
+function salarioReajuste(salarioAtual: number): number[] {
+    let salarioReajuste: number;
+    let variavel: number;
+    if (salarioAtual < 280) {
+        salarioReajuste = salarioAtual * 1.20;
+        variavel = 20;
+        return [salarioReajuste, variavel];
+    } else if (salarioAtual >= 280 && salarioAtual < 700) {
+        salarioReajuste = salarioAtual * 1.15;
+        variavel = 15;
+        return [salarioReajuste, variavel];
+    } else if (salarioAtual >= 700 && salarioAtual < 1500) {
+        salarioReajuste = salarioAtual * 1.10;
+        variavel = 10;
+        return [salarioReajuste, variavel];
+    } else {
+        salarioReajuste = salarioAtual * 1.05;
+        variavel = 5;
+        return [salarioReajuste, variavel];
+    }
+}
+
+let salarioBase: number = 1500;
+let s: number = salarioReajuste(salarioBase)[0]
+let p: number = salarioReajuste(salarioBase)[1]
+
+console.log("11 - Reajuste Salário")
+console.log("Salário antes do reajuste: R$ " + salarioBase)
+console.log("Percentual de aumento aplicado " + p + "%")
+console.log("Valor do aumento: R$ " + (salarioBase * (p/100)))
+console.log("Salário novo: R$ " + s)
+
+// 12 - Faça um programa para o cálculo de uma folha de pagamento, sabendo que os descontos são do Imposto de Renda, que depende do salário bruto 
+// (conforme tabela abaixo) e 3% para o Sindicato e que o FGTS corresponde a 11% do Salário Bruto, mas não é descontado 
+// (é a empresa que deposita). O Salário Líquido corresponde ao Salário Bruto menos os descontos. 
+// O programa deverá pedir ao usuário o valor da sua hora e a quantidade de horas trabalhadas no mês.
+
+// Desconto do IR:
+// Salário Bruto até 900 (inclusive) - isento
+// Salário Bruto até 1500 (inclusive) - desconto de 5%
+// Salário Bruto até 2500 (inclusive) - desconto de 10%
+// Salário Bruto acima de 2500 - desconto de 20% Imprima na tela as informações, dispostas conforme o exemplo abaixo. No exemplo o valor da hora é 5 e a quantidade de hora é 220.
+
+function salarioBrutoCalculoComHoras(horas: number, valorHora: number): number {
+    let salarioBruto: number = horas * valorHora; 
+    return salarioBruto;
+}
+
+let salarioB: number = salarioBrutoCalculoComHoras(220, 25)
+
+function descontoIRINSS(salarioB: number): number {
+    let sIr: number;
+    let sINSS: number;
+    if(salarioB < 900) {
+        sINSS = salarioB * 0.10;
+        return salarioB - (sINSS);
+    } else if (salarioB >= 900 && salarioB < 1500) {
+        sIr = salarioB * 0.05;
+        sINSS = salarioB * 0.10;
+        return salarioB - (sIr + sINSS);
+    } else if (salarioB >= 1500 && salarioB < 2500) {
+        sIr = salarioB * 0.05;
+        sINSS = salarioB * 0.10;
+        return salarioB - (sIr + sINSS);
+    } else if (salarioB >= 2500) {
+        sIr = salarioB * 0.05;
+        sINSS = salarioB * 0.10;
+        return salarioB - (sIr + sINSS);
+    } else {
+        return 0
+    }
+}
+
+console.log(descontoIRINSS(salarioB))
