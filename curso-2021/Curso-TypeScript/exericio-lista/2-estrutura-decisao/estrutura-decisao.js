@@ -1,4 +1,9 @@
 "use strict";
+var __spreadArray = (this && this.__spreadArray) || function (to, from) {
+    for (var i = 0, il = from.length, j = to.length; i < il; i++, j++)
+        to[j] = from[i];
+    return to;
+};
 console.log("--- Questões da Lista de Estrutura de Decisão ---");
 // 1 - Faça um Programa que peça dois números e imprima o maior deles.
 function maiorNumero(numero1, numero2) {
@@ -7,7 +12,7 @@ function maiorNumero(numero1, numero2) {
     }
     return numero2;
 }
-console.log("1 - O maior número é: " + maiorNumero(10, 15));
+console.log("1: O maior número é: " + maiorNumero(10, 15));
 // 2- Faça um Programa que peça um valor e mostre na tela se o valor é positivo ou negativo.
 function valorPositivoNegativo(numero) {
     if (numero > 0) {
@@ -20,7 +25,7 @@ function valorPositivoNegativo(numero) {
         return 'Zero é neutro';
     }
 }
-console.log("2 - O número é: " + valorPositivoNegativo(15));
+console.log("2: O número é: " + valorPositivoNegativo(15));
 // 3 - Faça um Programa que verifique se uma letra digitada é "F" ou "M". Conforme a letra escrever: F - Feminino, M - Masculino, Sexo Inválido.
 function verificadorLetra(letra) {
     if (letra === 'F' || letra === 'f') {
@@ -33,7 +38,7 @@ function verificadorLetra(letra) {
         return 'Não identificado';
     }
 }
-console.log("3 - Sexo: " + verificadorLetra('m'));
+console.log("3: Sexo: " + verificadorLetra('m'));
 // 4 - Faça um Programa que verifique se uma letra digitada é vogal ou consoante.
 function verificadorVogal(vogal) {
     vogal.toUpperCase();
@@ -42,7 +47,7 @@ function verificadorVogal(vogal) {
     }
     return 'consoante!';
 }
-console.log("4 - A letra é: " + verificadorVogal('m'));
+console.log("4: A letra é: " + verificadorVogal('m'));
 // 5 - Faça um programa para a leitura de duas notas parciais de um aluno. O programa deve calcular a média alcançada por aluno e apresentar:
 // A mensagem "Aprovado", se a média alcançada for maior ou igual a sete;
 // A mensagem "Reprovado", se a média for menor do que sete;
@@ -59,7 +64,7 @@ function mediaAluno(nota1, nota2) {
         return 'Reprovado.';
     }
 }
-console.log("5 - " + mediaAluno(10, 10));
+console.log("5: " + mediaAluno(10, 10));
 // 6 - Faça um Programa que leia três números e mostre o maior e o menor deles.
 function maiorTres(num1, num2, num3) {
     if (num1 > num2 && num1 > num3) {
@@ -186,7 +191,7 @@ function salarioReajuste(salarioAtual) {
 var salarioBase = 1500;
 var s = salarioReajuste(salarioBase)[0];
 var p = salarioReajuste(salarioBase)[1];
-console.log("11 - Reajuste Salário");
+console.log("11: Reajuste Salário");
 console.log("Salário antes do reajuste: R$ " + salarioBase);
 console.log("Percentual de aumento aplicado " + p + "%");
 console.log("Valor do aumento: R$ " + (salarioBase * (p / 100)));
@@ -204,31 +209,53 @@ function salarioBrutoCalculoComHoras(horas, valorHora) {
     var salarioBruto = horas * valorHora;
     return salarioBruto;
 }
-var salarioB = salarioBrutoCalculoComHoras(220, 25);
-function descontoIRINSS(salarioB) {
-    var sIr;
-    var sINSS;
+var salarioB = salarioBrutoCalculoComHoras(220, 31.82);
+var descontoIr = [0.0, 0.05, 0.10, 0.20];
+var valorDescontoINSS = 0.10;
+var valorDescontoFGTS = 0.11;
+function calculoDescontoIR(salarioB) {
+    var descontoIr = [];
+    for (var _i = 1; _i < arguments.length; _i++) {
+        descontoIr[_i - 1] = arguments[_i];
+    }
+    var v = descontoIr;
+    var desINSS;
     if (salarioB < 900) {
-        sINSS = salarioB * 0.10;
-        return salarioB - (sINSS);
+        desINSS = salarioB * Number(v[0]);
+        return [Number(v[3] * 100), desINSS];
     }
     else if (salarioB >= 900 && salarioB < 1500) {
-        sIr = salarioB * 0.05;
-        sINSS = salarioB * 0.10;
-        return salarioB - (sIr + sINSS);
+        desINSS = salarioB * Number(v[1]);
+        return [Number(v[3] * 100), desINSS];
     }
     else if (salarioB >= 1500 && salarioB < 2500) {
-        sIr = salarioB * 0.05;
-        sINSS = salarioB * 0.10;
-        return salarioB - (sIr + sINSS);
+        desINSS = salarioB * Number(v[2]);
+        return [Number(v[3] * 100), desINSS];
     }
     else if (salarioB >= 2500) {
-        sIr = salarioB * 0.05;
-        sINSS = salarioB * 0.10;
-        return salarioB - (sIr + sINSS);
+        desINSS = salarioB * Number(v[3]);
+        return [Number(v[3] * 100), desINSS];
     }
     else {
-        return 0;
+        return [0, 0];
     }
 }
-console.log(descontoIRINSS(salarioB));
+function calculoDescontoINSS(salarioB, valorDescontoINSS) {
+    var descontoINSS;
+    descontoINSS = salarioB * valorDescontoINSS;
+    return [(valorDescontoINSS * 100), descontoINSS];
+}
+function calculoDescontoFGTS(salarioB, valorDescontoFGTS) {
+    var descontoFGTS;
+    descontoFGTS = salarioB * valorDescontoFGTS;
+    return descontoFGTS;
+}
+var totalDescontos = (calculoDescontoIR.apply(void 0, __spreadArray([salarioB], descontoIr))[1] + calculoDescontoINSS(salarioB, valorDescontoINSS)[1]);
+var salarioLiquido = salarioB - totalDescontos;
+console.log("12: Salário com Descontos");
+console.log(" --- Salário Bruto: R$ " + salarioB);
+console.log("( - ) Desconto IR (" + calculoDescontoIR.apply(void 0, __spreadArray([salarioB], descontoIr))[0] + "%) : R$ " + calculoDescontoIR.apply(void 0, __spreadArray([salarioB], descontoIr))[1]);
+console.log("( - ) Desconto INSS (" + calculoDescontoINSS(salarioB, valorDescontoINSS)[0] + "%) : R$ " + calculoDescontoINSS(salarioB, valorDescontoINSS)[1]);
+console.log("(   ) Desconto FGTS (" + valorDescontoFGTS * 100 + "%) : R$ " + calculoDescontoFGTS(salarioB, valorDescontoFGTS));
+console.log("( = ) Total de descontos: R$ " + totalDescontos);
+console.log("( = ) Salário Líquido: R$ " + salarioLiquido);

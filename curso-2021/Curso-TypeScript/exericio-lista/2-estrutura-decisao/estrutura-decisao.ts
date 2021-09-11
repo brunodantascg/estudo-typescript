@@ -9,7 +9,7 @@ function maiorNumero(numero1: number, numero2: number): number {
     return numero2
 }
 
-console.log("1 - O maior número é: " + maiorNumero(10, 15))
+console.log("1: O maior número é: " + maiorNumero(10, 15))
 
 // 2- Faça um Programa que peça um valor e mostre na tela se o valor é positivo ou negativo.
 
@@ -23,7 +23,7 @@ function valorPositivoNegativo(numero: number): string {
     }
 }
 
-console.log("2 - O número é: " + valorPositivoNegativo(15))
+console.log("2: O número é: " + valorPositivoNegativo(15))
 
 // 3 - Faça um Programa que verifique se uma letra digitada é "F" ou "M". Conforme a letra escrever: F - Feminino, M - Masculino, Sexo Inválido.
 
@@ -37,7 +37,7 @@ function verificadorLetra(letra: string): string {
     }
 }
 
-console.log("3 - Sexo: " + verificadorLetra('m'))
+console.log("3: Sexo: " + verificadorLetra('m'))
 
 // 4 - Faça um Programa que verifique se uma letra digitada é vogal ou consoante.
 
@@ -49,7 +49,7 @@ function verificadorVogal(vogal: string): string {
     return 'consoante!'
 }
 
-console.log("4 - A letra é: " + verificadorVogal('m'))
+console.log("4: A letra é: " + verificadorVogal('m'))
 
 // 5 - Faça um programa para a leitura de duas notas parciais de um aluno. O programa deve calcular a média alcançada por aluno e apresentar:
 // A mensagem "Aprovado", se a média alcançada for maior ou igual a sete;
@@ -67,7 +67,7 @@ function mediaAluno(nota1: number, nota2: number): string {
     }
 }
 
-console.log("5 - " + mediaAluno(10, 10))
+console.log("5: " + mediaAluno(10, 10))
 
 // 6 - Faça um Programa que leia três números e mostre o maior e o menor deles.
 function maiorTres(num1: number, num2: number, num3: number): number {
@@ -191,7 +191,7 @@ let salarioBase: number = 1500;
 let s: number = salarioReajuste(salarioBase)[0]
 let p: number = salarioReajuste(salarioBase)[1]
 
-console.log("11 - Reajuste Salário")
+console.log("11: Reajuste Salário")
 console.log("Salário antes do reajuste: R$ " + salarioBase)
 console.log("Percentual de aumento aplicado " + p + "%")
 console.log("Valor do aumento: R$ " + (salarioBase * (p/100)))
@@ -213,29 +213,50 @@ function salarioBrutoCalculoComHoras(horas: number, valorHora: number): number {
     return salarioBruto;
 }
 
-let salarioB: number = salarioBrutoCalculoComHoras(220, 25)
+let salarioB: number = salarioBrutoCalculoComHoras(220, 31.82)
+let descontoIr: number[] = [0.0, 0.05, 0.10, 0.20];
+let valorDescontoINSS: number = 0.10;
+let valorDescontoFGTS: number = 0.11;
 
-function descontoIRINSS(salarioB: number): number {
-    let sIr: number;
-    let sINSS: number;
+function calculoDescontoIR(salarioB: number, ...descontoIr: number[]): number[] {
+    let v: number[] = descontoIr;
+    let desINSS: number;
     if(salarioB < 900) {
-        sINSS = salarioB * 0.10;
-        return salarioB - (sINSS);
+        desINSS = salarioB * Number(v[0]);
+        return [Number(v[3]*100), desINSS];
     } else if (salarioB >= 900 && salarioB < 1500) {
-        sIr = salarioB * 0.05;
-        sINSS = salarioB * 0.10;
-        return salarioB - (sIr + sINSS);
+        desINSS = salarioB * Number(v[1]);
+        return [Number(v[3]*100), desINSS];
     } else if (salarioB >= 1500 && salarioB < 2500) {
-        sIr = salarioB * 0.05;
-        sINSS = salarioB * 0.10;
-        return salarioB - (sIr + sINSS);
+        desINSS = salarioB * Number(v[2]);
+        return [Number(v[3]*100), desINSS];
     } else if (salarioB >= 2500) {
-        sIr = salarioB * 0.05;
-        sINSS = salarioB * 0.10;
-        return salarioB - (sIr + sINSS);
+        desINSS = salarioB * Number(v[3]);
+        return [Number(v[3]*100), desINSS];
     } else {
-        return 0
+        return [0, 0];
     }
 }
 
-console.log(descontoIRINSS(salarioB))
+function calculoDescontoINSS(salarioB: number, valorDescontoINSS: number): number[] {
+    let descontoINSS: number;
+    descontoINSS = salarioB * valorDescontoINSS;
+    return [(valorDescontoINSS*100), descontoINSS];
+}
+
+function calculoDescontoFGTS(salarioB: number, valorDescontoFGTS: number): number {
+    let descontoFGTS: number;
+    descontoFGTS = salarioB * valorDescontoFGTS;
+    return descontoFGTS;
+}
+
+let totalDescontos: number = (calculoDescontoIR(salarioB, ...descontoIr)[1] + calculoDescontoINSS(salarioB, valorDescontoINSS)[1]);
+let salarioLiquido: number = salarioB - totalDescontos;
+
+console.log("12: Salário com Descontos")
+console.log(" --- Salário Bruto: R$ " + salarioB)
+console.log("( - ) Desconto IR (" + calculoDescontoIR(salarioB, ...descontoIr)[0] + "%) : R$ " + calculoDescontoIR(salarioB, ...descontoIr)[1])
+console.log("( - ) Desconto INSS (" + calculoDescontoINSS(salarioB, valorDescontoINSS)[0]+ "%) : R$ " + calculoDescontoINSS(salarioB, valorDescontoINSS)[1])
+console.log("(   ) Desconto FGTS (" + valorDescontoFGTS*100 +  "%) : R$ " + calculoDescontoFGTS(salarioB, valorDescontoFGTS));
+console.log("( = ) Total de descontos: R$ " + totalDescontos);
+console.log("( = ) Salário Líquido: R$ " + salarioLiquido);
