@@ -653,6 +653,40 @@ console.log("27: valor a ser pago: R$ " + calculadoraFruteira(5, 3));
 // Se compra for feita no cartão Tabajara o cliente receberá ainda um desconto de 5% sobre o total da compra.
 // Escreva um programa que peça o tipo e a quantidade de carne comprada pelo usuário e gere um cupom fiscal, contendo as informações da compra:
 // tipo e quantidade de carne, preço total, tipo de pagamento, valor do desconto e valor a pagar.
-function hiperMercado() {
+function hiperMercado(tipoCarne, formaPagamento, quantCarne) {
+    function fileDuplo(quantCarne) {
+        if (quantCarne >= 0 && quantCarne < 5) {
+            return quantCarne * 4.90;
+        }
+        else if (quantCarne >= 5) {
+            return quantCarne * 5.80;
+        }
+        else {
+            return 0;
+        }
+    }
+    function alcantra(quantCarne) {
+        if (quantCarne >= 0 && quantCarne < 5) {
+            return quantCarne * 5.90;
+        }
+        else if (quantCarne >= 5) {
+            return quantCarne * 6.80;
+        }
+        else {
+            return 0;
+        }
+    }
+    function picanha(quantCarne) {
+        if (quantCarne >= 0 && quantCarne < 5) {
+            return quantCarne * 6.90;
+        }
+        else if (quantCarne >= 5) {
+            return quantCarne * 7.80;
+        }
+        else {
+            return 0;
+        }
+    }
+    return 0;
 }
-console.log("28: ");
+console.log("28: valor a ser pago: R$ " + hiperMercado("P", "S", 10));

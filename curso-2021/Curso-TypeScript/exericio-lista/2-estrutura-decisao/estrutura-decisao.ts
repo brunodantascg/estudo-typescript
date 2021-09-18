@@ -727,6 +727,7 @@ function hiperMercado(tipoCarne: string, formaPagamento: string , quantCarne: nu
         }
     }
 
+    return 0;
 
 }
 
