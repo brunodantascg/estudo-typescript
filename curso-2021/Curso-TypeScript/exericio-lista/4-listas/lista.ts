@@ -66,3 +66,16 @@ console.log("Impares: " + impar)
 
 // 7- Faça um Programa que peça as quatro notas de 10 alunos, calcule e armazene num vetor a média de cada aluno, imprima o número de alunos com média maior ou igual a 7.0.
 
+let alunos10: string[] = ["Carlos", "Augusto", "João", "Roberto", "Alessandro", "Arthur", "Carla", "Júnior", "Urual", "Beatriz"]
+let media10: number[] = []
+
+for (var ime = 0; ime < alunos10.length; ime++) {
+
+    let no: number = 0
+    for (var ide = 0; ide < 4; ide++) {
+        let notas: number = Math.random()
+        notas = no + notas
+    }
+
+
+}
