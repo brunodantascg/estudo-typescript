@@ -1,9 +1,4 @@
 "use strict";
-var __spreadArray = (this && this.__spreadArray) || function (to, from) {
-    for (var i = 0, il = from.length, j = to.length; i < il; i++, j++)
-        to[j] = from[i];
-    return to;
-};
 console.log("--- Questões da Lista de Estrutura de Decisão ---");
 // 1 - Faça um Programa que peça dois números e imprima o maior deles.
 function maiorNumero(numero1, numero2) {
@@ -53,7 +48,7 @@ console.log("4: A letra é: " + verificadorVogal('m'));
 // A mensagem "Reprovado", se a média for menor do que sete;
 // A mensagem "Aprovado com Distinção", se a média for igual a dez.
 function mediaAluno(nota1, nota2) {
-    var media = (nota1 + nota2) / 2;
+    let media = (nota1 + nota2) / 2;
     if (media === 10) {
         return 'Aprovado com Distinção.';
     }
@@ -165,8 +160,8 @@ console.log("10: " + turnoEstudo('v'));
 // o valor do aumento;
 // o novo salário, após o aumento.
 function salarioReajuste(salarioAtual) {
-    var salarioReajuste;
-    var variavel;
+    let salarioReajuste;
+    let variavel;
     if (salarioAtual < 280) {
         salarioReajuste = salarioAtual * 1.20;
         variavel = 20;
@@ -188,9 +183,9 @@ function salarioReajuste(salarioAtual) {
         return [salarioReajuste, variavel];
     }
 }
-var salarioBase = 1500;
-var s = salarioReajuste(salarioBase)[0];
-var p = salarioReajuste(salarioBase)[1];
+let salarioBase = 1500;
+let s = salarioReajuste(salarioBase)[0];
+let p = salarioReajuste(salarioBase)[1];
 console.log("11: Reajuste Salário");
 console.log("Salário antes do reajuste: R$ " + salarioBase);
 console.log("Percentual de aumento aplicado " + p + "%");
@@ -206,20 +201,16 @@ console.log("Salário novo: R$ " + s);
 // Salário Bruto até 2500 (inclusive) - desconto de 10%
 // Salário Bruto acima de 2500 - desconto de 20% Imprima na tela as informações, dispostas conforme o exemplo abaixo. No exemplo o valor da hora é 5 e a quantidade de hora é 220.
 function salarioBrutoCalculoComHoras(horas, valorHora) {
-    var salarioBruto = horas * valorHora;
+    let salarioBruto = horas * valorHora;
     return salarioBruto;
 }
-var salarioB = salarioBrutoCalculoComHoras(220, 31.82);
-var descontoIr = [0.0, 0.05, 0.10, 0.20];
-var valorDescontoINSS = 0.10;
-var valorDescontoFGTS = 0.11;
-function calculoDescontoIR(salarioB) {
-    var descontoIr = [];
-    for (var _i = 1; _i < arguments.length; _i++) {
-        descontoIr[_i - 1] = arguments[_i];
-    }
-    var v = descontoIr;
-    var desINSS;
+let salarioB = salarioBrutoCalculoComHoras(220, 31.82);
+let descontoIr = [0.0, 0.05, 0.10, 0.20];
+let valorDescontoINSS = 0.10;
+let valorDescontoFGTS = 0.11;
+function calculoDescontoIR(salarioB, ...descontoIr) {
+    let v = descontoIr;
+    let desINSS;
     if (salarioB < 900) {
         desINSS = salarioB * Number(v[0]);
         return [Number(v[3] * 100), desINSS];
@@ -241,20 +232,20 @@ function calculoDescontoIR(salarioB) {
     }
 }
 function calculoDescontoINSS(salarioB, valorDescontoINSS) {
-    var descontoINSS;
+    let descontoINSS;
     descontoINSS = salarioB * valorDescontoINSS;
     return [(valorDescontoINSS * 100), descontoINSS];
 }
 function calculoDescontoFGTS(salarioB, valorDescontoFGTS) {
-    var descontoFGTS;
+    let descontoFGTS;
     descontoFGTS = salarioB * valorDescontoFGTS;
     return descontoFGTS;
 }
-var totalDescontos = (calculoDescontoIR.apply(void 0, __spreadArray([salarioB], descontoIr))[1] + calculoDescontoINSS(salarioB, valorDescontoINSS)[1]);
-var salarioLiquido = salarioB - totalDescontos;
+let totalDescontos = (calculoDescontoIR(salarioB, ...descontoIr)[1] + calculoDescontoINSS(salarioB, valorDescontoINSS)[1]);
+let salarioLiquido = salarioB - totalDescontos;
 console.log("12: Salário com Descontos");
 console.log(" --- Salário Bruto: R$ " + salarioB);
-console.log("( - ) Desconto IR (" + calculoDescontoIR.apply(void 0, __spreadArray([salarioB], descontoIr))[0] + "%) : R$ " + calculoDescontoIR.apply(void 0, __spreadArray([salarioB], descontoIr))[1]);
+console.log("( - ) Desconto IR (" + calculoDescontoIR(salarioB, ...descontoIr)[0] + "%) : R$ " + calculoDescontoIR(salarioB, ...descontoIr)[1]);
 console.log("( - ) Desconto INSS (" + calculoDescontoINSS(salarioB, valorDescontoINSS)[0] + "%) : R$ " + calculoDescontoINSS(salarioB, valorDescontoINSS)[1]);
 console.log("(   ) Desconto FGTS (" + valorDescontoFGTS * 100 + "%) : R$ " + calculoDescontoFGTS(salarioB, valorDescontoFGTS));
 console.log("( = ) Total de descontos: R$ " + totalDescontos);
@@ -288,10 +279,10 @@ function diasDaSemana(dia) {
 }
 console.log("13: Dia da semana: " + diasDaSemana(1));
 // 14 - Faça um programa que lê as duas notas parciais obtidas por um aluno numa disciplina ao longo de um semestre, e calcule a sua média. A atribuição de conceitos obedece à tabela abaixo:
-var notaParcial1 = 10;
-var notaParcial2 = 9;
+let notaParcial1 = 10;
+let notaParcial2 = 9;
 function conceitoAluno(notaParcial1, notaParcial2) {
-    var media = (notaParcial1 + notaParcial2) / 2;
+    let media = (notaParcial1 + notaParcial2) / 2;
     if (media >= 0 && media <= 10) {
         if (media > 9 && media <= 10) {
             return ["9.0 e 10.0 ", "     A", " APROVADO"];
@@ -323,9 +314,9 @@ console.log("Entre " + conceitoAluno(notaParcial1, notaParcial2));
 // + Triângulo Equilátero: três lados iguais;
 // + Triângulo Isósceles: quaisquer dois lados iguais;
 // + Triângulo Escaleno: três lados diferentes;
-var lado1 = 10;
-var lado2 = 20;
-var lado3 = 40;
+let lado1 = 10;
+let lado2 = 20;
+let lado3 = 40;
 console.log("15: ");
 function podeSerTriangulo(lado1, lado2, lado3) {
     if (((lado1 + lado2) > lado3) || ((lado2 + lado3) > lado3) || ((lado1 + lado3) > lado3)) {
@@ -354,23 +345,23 @@ console.log(podeSerTriangulo(lado1, lado2, lado3));
 // b - Se o delta calculado for negativo, a equação não possui raizes reais. Informe ao usuário e encerre o programa;
 // c - Se o delta calculado for igual a zero a equação possui apenas uma raiz real; informe-a ao usuário;
 // d - Se o delta for positivo, a equação possui duas raiz reais; informe-as ao usuário;
-var aEqua = 5;
-var bEqua = 10;
-var cEqua = 13;
+let aEqua = 5;
+let bEqua = 10;
+let cEqua = 13;
 function calculoRaizes(aEqua, bEqua, cEqua) {
     if (aEqua != 0) {
-        var delta = ((Math.pow(bEqua, 2)) - (4 - aEqua * cEqua));
+        let delta = ((Math.pow(bEqua, 2)) - (4 - aEqua * cEqua));
         if (delta < 0) {
             return "Delta negativo! Não possui raízes reais!";
         }
         else if ((delta < 0) && (delta == 0)) {
-            var equma = (-bEqua) / 2 * aEqua;
-            return "A equa\u00E7\u00E3o possui apenas uma raiz real! " + equma;
+            let equma = (-bEqua) / 2 * aEqua;
+            return `A equação possui apenas uma raiz real! ${equma}`;
         }
         else if (delta > 0) {
-            var eqdua1 = (-bEqua + delta) / 2 * aEqua;
-            var eqdua2 = (-bEqua - delta) / 2 * aEqua;
-            return "A equa\u00E7\u00E3o possui duas ra\u00EDzes reias! " + eqdua1 + " e " + eqdua2;
+            let eqdua1 = (-bEqua + delta) / 2 * aEqua;
+            let eqdua2 = (-bEqua - delta) / 2 * aEqua;
+            return `A equação possui duas raízes reias! ${eqdua1} e ${eqdua2}`;
         }
         else {
             return "Erro";
@@ -382,7 +373,7 @@ function calculoRaizes(aEqua, bEqua, cEqua) {
 }
 console.log("16: " + calculoRaizes(aEqua, bEqua, cEqua));
 // 17 - Faça um Programa que peça um número correspondente a um determinado ano e em seguida informe se este ano é ou não bissexto
-var ano = 1990;
+let ano = 1990;
 function anoBisexto(ano) {
     if (((ano % 100) != 0) || ((ano % 4) == 0) || ((ano % 400) == 0)) {
         return "O Ano é Bissexto!";
@@ -393,9 +384,9 @@ function anoBisexto(ano) {
 }
 console.log("17: " + anoBisexto(ano));
 // 18 - Faça um Programa que peça uma data no formato dd/mm/aaaa e determine se a mesma é uma data válida.
-var dd = 9;
-var mm = 12;
-var aaaa = 1990;
+let dd = 9;
+let mm = 12;
+let aaaa = 1990;
 function validarData(dd, mm, aaaa) {
     if (((dd > 0) && (dd <= 31)) && ((mm > 0) && (mm <= 12)) && ((aaaa > 0) && (aaaa <= 9999))) {
         return "A data é válida!";
@@ -409,11 +400,11 @@ console.log("18: " + validarData(dd, mm, aaaa));
 // Observando os termos no plural a colocação do "e", da vírgula entre outros. Exemplo:
 // a - 326 = 3 centenas, 2 dezenas e 6 unidades
 // b - 12 = 1 dezena e 2 unidades Testar com: 326, 300, 100, 320, 310,305, 301, 101, 311, 111, 25, 20, 10, 21, 11, 1, 7 e 16
-var nInt = 20;
+let nInt = 20;
 function qunatCentenas(nInt) {
-    var centenas = nInt / 100;
-    var dezenas = Math.floor(nInt / 100) / 10;
-    var unidades = Math.floor(Math.floor(nInt / 100) / 10);
+    let centenas = nInt / 100;
+    let dezenas = Math.floor(nInt / 100) / 10;
+    let unidades = Math.floor(Math.floor(nInt / 100) / 10);
     if (nInt > 0 && nInt <= 1000) {
         return [];
     }
@@ -427,17 +418,17 @@ function qunatCentenas(nInt) {
 // c - A mensagem "Aprovado com Distinção", se a média for igual a 10.
 function mediaParcial(nota_par_01, nota_par_02, nota_par_03, aluno) {
     if ((nota_par_01 >= 0 && nota_par_01 <= 10) && (nota_par_02 >= 0 && nota_par_02 <= 10) && (nota_par_03 >= 0 && nota_par_03 <= 10)) {
-        var media_1 = (nota_par_01 + nota_par_02 + nota_par_03) / 3;
-        if (media_1 >= 7 && media_1 <= 10) {
-            if (media_1 == 10) {
-                return ["Aluno: " + aluno, " APROVADO COM DISTINÇÃO ", " Méida: " + media_1.toString()];
+        let media = (nota_par_01 + nota_par_02 + nota_par_03) / 3;
+        if (media >= 7 && media <= 10) {
+            if (media == 10) {
+                return ["Aluno: " + aluno, " APROVADO COM DISTINÇÃO ", " Méida: " + media.toString()];
             }
             else {
-                return ["Aluno: " + aluno, " APROVADO ", " Méida: " + media_1.toString()];
+                return ["Aluno: " + aluno, " APROVADO ", " Méida: " + media.toString()];
             }
         }
         else {
-            return ["Aluno: " + aluno, " REPROVADO ", " Méida: " + media_1.toString()];
+            return ["Aluno: " + aluno, " REPROVADO ", " Méida: " + media.toString()];
         }
     }
     else {
@@ -451,7 +442,7 @@ console.log("20: " + mediaParcial(10, 8, 9, "Bruno"));
 // Exemplo 1: Para sacar a quantia de 256 reais, o programa fornece duas notas de 100, uma nota de 50, uma nota de 5 e uma nota de 1;
 // Exemplo 2: Para sacar a quantia de 399 reais, o programa fornece três notas de 100, uma nota de 50, quatro notas de 10, uma nota de 5 e quatro notas de 1.
 function caixaEletrinico(valorSaque) {
-    var x = 3;
+    let x = 3;
     if (x == 3) {
         return "aqui 1";
     }
@@ -465,7 +456,7 @@ function caixaEletrinico(valorSaque) {
 console.log("21: " + caixaEletrinico(10));
 // 22 - Faça um Programa que peça um número inteiro e determine se ele é par ou impar. Dica: utilize o operador módulo (resto da divisão).
 function numImparPar(numero) {
-    var n = Math.floor(numero) % 2;
+    let n = Math.floor(numero) % 2;
     if (n == 1) {
         return "Impar";
     }
@@ -485,7 +476,7 @@ console.log("23: typeof(), só retorna se é um number, string, etc...");
 // b - positivo ou negativo;
 // c - inteiro ou decimal.
 function numPositivoNegativo(numero) {
-    var n = numero;
+    let n = numero;
     if (n > 0) {
         return "Positivo";
     }
@@ -498,28 +489,28 @@ function numPositivoNegativo(numero) {
 }
 function operacaoEspecificado(n1, n2, ope) {
     if (ope == 1) {
-        var soma_1 = n1 + n2;
-        var numIm = numImparPar(soma_1);
-        var numPn = numPositivoNegativo(soma_1);
-        return ["Opera\u00E7\u00E3o - soma: " + n1 + " + " + n2 + " = " + soma_1, " a. " + numIm, " b. " + numPn];
+        let soma = n1 + n2;
+        let numIm = numImparPar(soma);
+        let numPn = numPositivoNegativo(soma);
+        return [`Operação - soma: ${n1} + ${n2} = ${soma}`, " a. " + numIm, " b. " + numPn];
     }
     else if (ope == 2) {
-        var subtracao = n1 - n2;
-        var numIm = numImparPar(subtracao);
-        var numPn = numPositivoNegativo(subtracao);
-        return ["Opera\u00E7\u00E3o - subtra\u00E7\u00E3o: " + n1 + " - " + n2 + " = " + subtracao, " a. " + numIm, " b. " + numPn];
+        let subtracao = n1 - n2;
+        let numIm = numImparPar(subtracao);
+        let numPn = numPositivoNegativo(subtracao);
+        return [`Operação - subtração: ${n1} - ${n2} = ${subtracao}`, " a. " + numIm, " b. " + numPn];
     }
     else if (ope == 3) {
-        var multiplicacao = n1 * n2;
-        var numIm = numImparPar(multiplicacao);
-        var numPn = numPositivoNegativo(multiplicacao);
-        return ["Opera\u00E7\u00E3o - multiplica\u00E7\u00E3o: " + n1 + " - " + n2 + " = " + multiplicacao, " a. " + numIm, " b. " + numPn];
+        let multiplicacao = n1 * n2;
+        let numIm = numImparPar(multiplicacao);
+        let numPn = numPositivoNegativo(multiplicacao);
+        return [`Operação - multiplicação: ${n1} - ${n2} = ${multiplicacao}`, " a. " + numIm, " b. " + numPn];
     }
     else if (ope == 4) {
-        var divisao = n1 / n2;
-        var numIm = numImparPar(divisao);
-        var numPn = numPositivoNegativo(divisao);
-        return ["Opera\u00E7\u00E3o - divis\u00E3o: " + n1 + " - " + n2 + " = " + divisao, " a. " + numIm, " b. " + numPn];
+        let divisao = n1 / n2;
+        let numIm = numImparPar(divisao);
+        let numPn = numPositivoNegativo(divisao);
+        return [`Operação - divisão: ${n1} - ${n2} = ${divisao}`, " a. " + numIm, " b. " + numPn];
     }
     else {
         return ["operação errada."];
@@ -535,10 +526,10 @@ console.log("24: " + operacaoEspecificado(100, 90, 2));
 // O programa deve no final emitir uma classificação sobre a participação da pessoa no crime. Se a pessoa responder positivamente a 2 questões ela deve ser 
 // classificada como "Suspeita", entre 3 e 4 como "Cúmplice" e 5 como "Assassino". Caso contrário, ele será classificado como "Inocente".
 function classificacaoCrime(perg1, perg2, perg3, perg4, perg5) {
-    var respostas = [perg1, perg2, perg3, perg4, perg5];
-    var reSim = 0;
-    for (var i = 0; i < respostas.length; i++) {
-        var r = respostas[i];
+    let respostas = [perg1, perg2, perg3, perg4, perg5];
+    let reSim = 0;
+    for (let i = 0; i < respostas.length; i++) {
+        let r = respostas[i];
         if (r === "sim") {
             reSim = reSim + 1;
         }
@@ -572,28 +563,28 @@ console.log("25: " + classificacaoCrime("sim", "não", "sim", "não", "sim"));
 // Escreva um algoritmo que leia o número de litros vendidos, o tipo de combustível (codificado da seguinte forma: A-álcool, G-gasolina),
 // calcule e imprima o valor a ser pago pelo cliente sabendo-se que o preço do litro da gasolina é R$ 2,50 o preço do litro do álcool é R$ 1,90.
 function calculadoraPosto(litros, tipoCombustivel) {
-    var precoGasolina = 2.50;
-    var precoAlcool = 1.90;
+    let precoGasolina = 2.50;
+    let precoAlcool = 1.90;
     if (tipoCombustivel === "A") {
-        var valor_1 = precoAlcool * litros;
+        let valor = precoAlcool * litros;
         if (litros <= 20) {
-            var desconto_1 = valor_1 * 0.03;
-            return "A - \u00E1lcool R$: " + (valor_1 - desconto_1);
+            let desconto = valor * 0.03;
+            return `A - álcool R$: ${valor - desconto}`;
         }
         else {
-            var desconto_2 = valor_1 * 0.05;
-            return "A - \u00E1lcool R$: " + (valor_1 - desconto_2);
+            let desconto = valor * 0.05;
+            return `A - álcool R$: ${valor - desconto}`;
         }
     }
     else if (tipoCombustivel === "G") {
-        var valor_2 = precoGasolina * litros;
+        let valor = precoGasolina * litros;
         if (litros <= 20) {
-            var desconto_3 = valor_2 * 0.04;
-            return "A - gasolina R$: " + (valor_2 - desconto_3);
+            let desconto = valor * 0.04;
+            return `A - gasolina R$: ${valor - desconto}`;
         }
         else {
-            var desconto_4 = valor_2 * 0.06;
-            return "A - gasolina R$: " + (valor_2 - desconto_4);
+            let desconto = valor * 0.06;
+            return `A - gasolina R$: ${valor - desconto}`;
         }
     }
     else {
@@ -632,12 +623,12 @@ function calculadoraFruteira(morangoKilo, macaKilo) {
         }
     }
     if (((macaKilo + morangoKilo) > 8) || (calculoMaca(macaKilo) + calculoMorango(morangoKilo)) > 25) {
-        var valorDesconto = (calculoMaca(macaKilo) + calculoMorango(morangoKilo)) * 0.10;
-        var valorTotal = (calculoMaca(macaKilo) + calculoMorango(morangoKilo)) - valorDesconto;
+        let valorDesconto = (calculoMaca(macaKilo) + calculoMorango(morangoKilo)) * 0.10;
+        let valorTotal = (calculoMaca(macaKilo) + calculoMorango(morangoKilo)) - valorDesconto;
         return valorTotal;
     }
     else {
-        var valorTotal = calculoMaca(macaKilo) + calculoMorango(morangoKilo);
+        let valorTotal = calculoMaca(macaKilo) + calculoMorango(morangoKilo);
         return valorTotal;
     }
 }

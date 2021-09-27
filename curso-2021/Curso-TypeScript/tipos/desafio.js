@@ -9,9 +9,9 @@ Criar Objeto funcionário com:
         -> fora do horário ( > 8)
 */
 console.log(" --- Desafio --- ");
-var funcionarios = {
+let funcionarios = {
     supervirores: ['Pedro', 'Alberto', 'João'],
-    baterPonto: function (horas) {
+    baterPonto(horas) {
         if (horas <= 8) {
             return 'ponto normal - (' + horas + ' <= 8 ).';
         }
