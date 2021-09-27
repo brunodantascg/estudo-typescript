@@ -61,3 +61,18 @@ function retornarArray(...args) {
     return args;
 }
 console.log(retornarArray(10, 20, 30, 40, 50));
+// Destructuring Array
+const caracteristicas = ['Motor Zetec 1.8', 2020];
+const [motor, ano1] = caracteristicas;
+console.log(motor);
+console.log(ano1);
+// Destructuring Objeto
+const item = {
+    nome: 'SSD 480GB',
+    preco: 200
+};
+// const nomeItem = item.nome
+// const preco = item.preco
+const { nome: n, preco: pr } = item;
+console.log(n);
+console.log(pr);
